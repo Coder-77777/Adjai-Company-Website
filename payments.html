@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ADJAI Payments</title>
+<link rel="stylesheet" href="main.css">
+
+<style>
+
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#0b1020;
+    color:white;
+}
+
+.container{
+    width:90%;
+    max-width:700px;
+    margin:50px auto;
+}
+
+.card{
+    background:#161d35;
+    padding:25px;
+    border-radius:12px;
+}
+
+h1{
+    text-align:center;
+}
+
+input,
+select,
+button{
+    width:100%;
+    padding:12px;
+    margin-top:10px;
+    border:none;
+    border-radius:8px;
+}
+
+button{
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.info{
+    margin-top:20px;
+    padding:15px;
+    background:#202b52;
+    border-radius:8px;
+}
+
+</style>
+</head>
+
+<body>
+<header>
+    <h1>ADJAI SOFTWARE DEVELOPERS</h1>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="developers.html">Developers</a>
+        <a href="payments.html">Payments</a>
+        <a href="login.html">Login</a>
+        <a href="register.html">Register</a>
+    </nav>
+</header>
+
+<div class="container">
+
+    <div class="card">
+
+        <h1>ADJAI Payments</h1>
+
+        <input
+            type="text"
+            id="productId"
+            placeholder="Product ID"
+        >
+
+        <input
+            type="number"
+            id="amount"
+            placeholder="Amount"
+        >
+
+        <input
+            type="text"
+            id="phone"
+            placeholder="2547XXXXXXXX"
+        >
+
+        <select id="method">
+            <option value="MPESA">M-Pesa</option>
+            <option value="PAYPAL">PayPal</option>
+        </select>
+
+        <button onclick="payNow()">
+            Proceed To Payment
+        </button>
+
+        <div class="info" id="result">
+            Waiting for payment request...
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+const API = "/api";
+
+const urlParams = new URLSearchParams(window.location.search);
+const initialProductId = urlParams.get("productId");
+
+if (initialProductId) {
+    document.getElementById("productId").value = initialProductId;
+}
+
+async function payNow(){
+
+    const productId =
+        document.getElementById("productId").value;
+
+    const amount =
+        document.getElementById("amount").value;
+
+    const phone =
+        document.getElementById("phone").value;
+
+    const method =
+        document.getElementById("method").value;
+
+    let endpoint;
+
+    if(method === "MPESA"){
+        endpoint = "/payments/mpesa";
+    }else{
+        endpoint = "/payments/paypal";
+    }
+
+    try{
+
+        const response = await fetch(
+            API + endpoint,
+            {
+                method:"POST",
+                headers:{
+                    "Content-Type":"application/json"
+                },
+                body:JSON.stringify({
+                    productId,
+                    amount,
+                    phone
+                })
+            }
+        );
+
+        const data = await response.json();
+
+        document.getElementById("result")
+        .innerHTML =
+        JSON.stringify(data,null,2);
+
+    }catch(error){
+
+        document.getElementById("result")
+        .innerHTML =
+        "Payment request failed.";
+
+        console.error(error);
+    }
+}
+
+</script>
+
+</body>
+</html>

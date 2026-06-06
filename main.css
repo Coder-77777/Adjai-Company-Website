@@ -1,0 +1,117 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: rgb(112, 7, 210);
+    color: white;
+}
+
+/* =========================
+   STARTUP SCREEN
+========================= */
+#startup {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgb(117, 6, 221);
+    animation: fadeOut 5s forwards;
+}
+
+.logo {
+    font-size: 60px;
+    color: gold;
+    letter-spacing: 5px;
+}
+
+/* =========================
+   MAIN APP
+========================= */
+header {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    background: blueviolet;
+}
+
+nav a {
+    color: white;
+    margin: 0 10px;
+    text-decoration: none;
+}
+
+.hero {
+    text-align: center;
+    padding: 60px;
+    background: linear-gradient(45deg, #2b1055, #7597de);
+}
+
+.products {
+    padding: 40px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.card {
+    background: #1c1c3a;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.card a,
+.card button {
+    color: white;
+    text-decoration: none;
+    display: inline-block;
+    background: #6f56d8;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 18px;
+    margin-top: 15px;
+    cursor: pointer;
+}
+
+.card a:hover,
+.card button:hover {
+    background: #5a3ec5;
+}
+
+.container {
+    width: 90%;
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 20px;
+    background: blueviolet;
+}
+
+.stats {
+    display: flex;
+    justify-content: space-around;
+    padding: 40px;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background: rgb(6, 6, 238);
+}
+
+@keyframes fadeOut {
+    0% {opacity: 1;}
+    80% {opacity: 1;}
+    100% {opacity: 0; visibility: hidden;}
+}
+
+.logo {
+    width:15px;
+    height:15px;
+)
